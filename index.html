@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title >Psychic Game </title>
+    <h1> Psychic Game! </h1>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<div id = "game">
+		<p> Press any letter in the alphabet to start playing! </p>
+		<p id="demo"> </p>
+	</div>
+
+	<script type= "text/javascript">
+
+		var alphabet = ["a", "b", "c", 'd', 'e', 'f', 'g', 'h',
+        'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+        't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+        var userText = document.getElementById("game");
+        var wins = 0;
+        var losses = 0;
+        var guessesLeft = 10;
+        var guessesSoFar= [];
+        var computerGuess;
+
+        document.onkeyup = function(event) {
+        	var userGuess = event.key;
+
+        	computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+        
+        	
+
+        	if (userGuess != computerGuess) {
+        		losses++;
+        		guessesLeft--; 
+        		guessesSoFar.push(userGuess);
+        	}
+        	
+        	if (userGuess===computerGuess){
+        		wins++;
+        		reset();
+        	} 
+        	if (guessesLeft == 0) {
+                alert("You lost, sorry")
+        		reset();
+        	} 	
+
+
+        	function reset () {
+        		guessesLeft	= 10;
+        		guessesSoFar = [];
+        		losses =0;
+
+        	}
+
+
+        	 var html =
+      
+          "<p>You chose: " + userGuess + "</p></div>" +
+          "<p>The computer chose: " + computerGuess + "</p>" +
+          "<p>wins: " + wins + "</p>" +
+          "<p>losses: " + losses + "</p>" + 
+          "<p> Guesses Left:" + guessesLeft + "</p>" +
+          "<p>Your guesses so far:" + guessesSoFar + "</p>";
+
+
+          userText.innerHTML = html;
+
+        	}
+
+        
+    </script>
+</body>
+</html>
